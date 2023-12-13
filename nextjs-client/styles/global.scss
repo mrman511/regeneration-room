@@ -1,0 +1,13 @@
+@import './variables.scss';
+
+.header{
+  background-color: $darkPrimary;
+}
+
+.navigation{
+
+  a{
+
+    color: $secondary2;
+  }
+}
