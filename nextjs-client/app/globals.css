@@ -18,6 +18,6 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-h1 {
-  /* font-family: adobe-jenson-pro, serif; */
+input {
+  color: #000;
 }
