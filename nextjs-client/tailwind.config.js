@@ -9,6 +9,9 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens: {
+      'xs': '420px',
+    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -18,6 +21,12 @@ module.exports = {
       fontFamily: {
         'base': ['adobe-jenson-pro', 'serif'],
         'cursive': ['var(--cursive-font)', ...fontFamily.sans]
+      },
+      colors:{
+        'primary-dark': '#1B1464',
+        'primary-light': '#11A5E1',
+        'secondary-action': '#F5D06F',
+        'secondary-trim': '#BA7802'
       }
     },
   },

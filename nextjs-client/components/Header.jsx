@@ -31,7 +31,7 @@ export default function Header({ styles }){
             sizes='250px'
           />
         </div>
-        <div className="relative h-24 w-48 hidden max-sm:block">
+        <div className="relative h-24 w-44 hidden max-sm:block">
             <Image 
               src={ logoFull }
               alt='Regeneration Room'
