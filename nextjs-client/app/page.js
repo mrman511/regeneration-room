@@ -1,4 +1,3 @@
-
 import styles from '@/styles/Styles.module.scss'
 import ComingSoon from '@/components/ComingSoon'
 
