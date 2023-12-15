@@ -1,4 +1,5 @@
 import {useState, useRef} from 'react';
+import postRequest from '@/utils/api-requests/postRequests';
 
 export default function FormContainer({ styles, FormComponent, title }){
   const [errObj, setErrObj] = useState({});
@@ -6,14 +7,19 @@ export default function FormContainer({ styles, FormComponent, title }){
 
   const top = title ? '' : 'top-[20vh]';
 
-  const handleSubmit = (e, validate) => {
+  const handleSubmit = (e, path, submissionObj) => {
     e.preventDefault();
     const formData = new FormData(formRef.current);
-    if (validate){
-      validate(formData, setErrObj);
+    if (submissionObj.validate){
+      submissionObj.validate(formData, setErrObj);
     }
     if (Object.keys(errObj).length === 0){
-      console.log('Valid')
+      const reqObj ={
+        path: path,
+        method: e.target.method,
+        body: formData, 
+      }
+      postRequest(reqObj, submissionObj.stateFunc)
     }
   }
 
