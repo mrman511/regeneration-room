@@ -1,13 +1,27 @@
 import Link from "next/link";
+import { useCookies } from "react-cookie";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm({ styles, handleSubmit, formRef, errObj }){
+  const [cookie, setCookie, removeCookie] = useCookies(['user'])
+
+  const setUser = (res) =>{
+    setCookie('user', res.data.access, {
+      path: '/',
+      maxAge: 24 * 3600,
+    })
+  };
+
+  const submissionObj = {
+    stateFunc: setUser,
+  }
 
   return (
     <>
-      <form ref={ formRef } onSubmit={ handleSubmit } method='POST' className="w-full flex flex-col">
+      <form method='POST' ref={ formRef } onSubmit={ (e)=>{handleSubmit(e, '/users/token/', submissionObj)} } className="w-full flex flex-col">
         <div className="w-full flex flex-col my-2">
-          <label className='mb-1' htmlFor="email">Email:</label>
-          <input className="p-1 rounded-md" type='email' name='email' required/>
+          <label className='mb-1' htmlFor="username">Username:</label>
+          <input className="p-1 rounded-md" type='text' name='username' required/>
         </div>
         <div className="w-full flex flex-col my-2">
           <label className='mb-1' htmlFor='password'>Password:</label>
@@ -18,7 +32,7 @@ export default function LoginForm({ styles, handleSubmit, formRef, errObj }){
           <label htmlFor='remember'>Remember Me</label>
         </div>
         <div>
-          <input className='border-2 border-secondary-action rounded-lg px-4 py-1 text-white' type='submit' value='Login'/>
+          <input className='border-2 border-secondary-action rounded-lg px-4 py-1 text-white hover:cursor-pointer' type='submit' value='Login'/>
         </div>
       </form>
 

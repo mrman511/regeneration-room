@@ -11,5 +11,7 @@ def end_points(request):
       'GET': 'api/',
     },
   }
-
   return Response(context)
+
+# @api_view(['POST'])
+# def login(request)

@@ -11,11 +11,15 @@ export default function RegistrationForm({ styles, handleSubmit,  formRef, errOb
     setErrObj(prev=>({...error}));
   }
 
+  const submissionObj = {
+    validate: validate
+  }
+
   return (
     <form 
       method='POST' 
       ref={ formRef } 
-      onSubmit={ (e) => { handleSubmit(e, validate) } } 
+      onSubmit={ (e) => { handleSubmit(e, '/users/', submissionObj) } } 
       className="w-full flex flex-col"
     >
       <div className="w-full flex flex-col sm:flex-row">
