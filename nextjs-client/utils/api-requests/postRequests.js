@@ -1,14 +1,16 @@
 import axios from "axios";
 
 export default function apiRequest(reqObj, responsefunc, catchFunction){
-  const { path, method, data } = reqObj
-  const requestData = [process.env.NEXT_PUBLIC_API_BASE_ROUTE + path]
-  if ( data ){
-    requestData.push(data)
+  const { path, method, body } = reqObj
+  const request = [process.env.NEXT_PUBLIC_API_BASE_ROUTE + path]
+  if ( body ){
+    request.push(body)
   }
-  axios[method](...requestData).then((res)=>{
+  
+  axios[method](...request).then((res)=>{
     responsefunc(res);
   }).catch((err)=>{
+    console.log(err)
     if (catchFunction){
       catchFunction(err);
     }
