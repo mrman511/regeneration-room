@@ -3,13 +3,17 @@
 import { motion, useCycle } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+
 import logo from '@/public/logo/logo.svg';
 import logoText from '@/public/logo/logo-text.svg'
 import logoFull from '@/public/logo/logo-full.svg'
 import Navigation from "./Navigation";
 
+import handleUserCookies from "@/utils/helpers/handleUserCookies";
+
 export default function Header({ styles }){
   const [showMenu, setShowMenu] = useCycle(false, true);
+  const { cookies, logout } = handleUserCookies()
   
   return (
     <header className={ [styles.header, "w-screen h-28 flex items-center justify-between z-10"].join(' ')}>
@@ -43,7 +47,7 @@ export default function Header({ styles }){
         </div>
       </Link>
 
-      <Navigation styles={ styles }/>
+      <Navigation styles={ styles } cookies={ cookies } logout={ logout } />
 
     </header>
   );

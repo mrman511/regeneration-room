@@ -3,13 +3,15 @@ import { useCookies } from "react-cookie";
 import { useRouter } from "next/navigation";
 
 export default function LoginForm({ styles, handleSubmit, formRef, errObj }){
-  const [cookie, setCookie, removeCookie] = useCookies(['user'])
+  const [cookie, setCookie, removeCookie] = useCookies(['user']);
+  const router = useRouter()
 
   const setUser = (res) =>{
     setCookie('user', res.data.access, {
       path: '/',
       maxAge: 24 * 3600,
     })
+    router.push('/')
   };
 
   const submissionObj = {
