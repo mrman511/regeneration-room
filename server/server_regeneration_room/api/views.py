@@ -13,5 +13,5 @@ def end_points(request):
   }
   return Response(context)
 
-# @api_view(['POST'])
-# def login(request)
+# @api_view(['GET'])
+# def CreateUser(request)
