@@ -29,6 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,6 +46,8 @@ INSTALLED_APPS = [
 
     'users.apps.UsersConfig',
 ]
+
+AUTH_USER_MODEL="users.CustomUser"
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
