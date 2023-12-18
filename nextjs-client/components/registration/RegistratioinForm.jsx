@@ -2,6 +2,7 @@
 import { useState, useRef } from "react";
 
 export default function RegistrationForm({ styles, handleSubmit,  formRef, errObj}){
+  const [notifications, setNotifications] = useState(true);
 
   const validate = (formData, setErrObj) => {
     const error={}
@@ -15,6 +16,10 @@ export default function RegistrationForm({ styles, handleSubmit,  formRef, errOb
     validate: validate
   }
 
+  const changeBoolValue = (e) => {
+    setNotifications(!notifications);
+  }
+
   return (
     <form 
       method='POST' 
@@ -25,18 +30,18 @@ export default function RegistrationForm({ styles, handleSubmit,  formRef, errOb
       <div className="w-full flex flex-col sm:flex-row">
         <div className="w-full sm:w-1/2 flex flex-col sm:pe-1 my-2">
           <label className='mb-1' htmlFor="first_name">First Name:</label>
-          <input className="rounded-md p-0.5" type='text' name='first_name' required/>
+          <input className="rounded-md p-0.5" type='text' name='first_name' value='Baul' required/>
         </div>
 
         <div className="w-full sm:w-1/2 flex flex-col sm:ps-1 my-2">
           <label className='mb-1' htmlFor="Last_name">Last Name:</label>
-          <input className="rounded-md p-0.5" type='text' name='Last_name' required/>
+          <input className="rounded-md p-0.5" type='text' name='last_name'value='Podner' required/>
         </div>
       </div>
 
       <div className="w-full flex flex-col my-2">
         <label className='mb-1' htmlFor="email">Email:</label>
-        <input className="rounded-md p-0.5" type='email' name='email' required/>
+        <input className="rounded-md p-0.5" type='email' name='email' value='nobodner80@gmail.com' required/>
       </div>
 
       <div className="relative w-full flex flex-col my-2 mt-4">
@@ -46,6 +51,7 @@ export default function RegistrationForm({ styles, handleSubmit,  formRef, errOb
           className={["rounded-md p-0.5", (errObj.matchingPasswords ? 'border-4 border-red-500' : '')].join(' ')} 
           type='password' 
           name='password' 
+          value='password'
           required
         /> 
       </div>
@@ -56,13 +62,14 @@ export default function RegistrationForm({ styles, handleSubmit,  formRef, errOb
           className={["rounded-md p-0.5", (errObj.matchingPasswords ? 'border-4 border-red-500' : '')].join(' ')} 
           type='password' 
           name='confirm_password' 
+          value='password'
           required
         /> 
       </div>
 
       <div className="w-full my-2">
-        <input className="me-2 h-4 w-4" type='checkbox' name='notifications'/>
-        <label className='text-base' htmlFor='notifications'>I would like to recieve updates and notifications from Regeneration Room</label>
+        <input onClick={ changeBoolValue } className="me-2 h-4 w-4" type='checkbox' name='notifications' checked={ notifications } value={ notifications }/>
+        <label className='text-base' htmlFor='notifications' >I would like to recieve updates and notifications from Regeneration Room</label>
       </div>
 
       <div>
