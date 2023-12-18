@@ -1,3 +1,4 @@
+from pickle import TRUE
 from django.db import models
 
 # Create your models here.
@@ -6,10 +7,10 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 class CustomUserManager(BaseUserManager):
   def create_user(self, email, password=None):
     if not email:
-        raise ValueError('Users must have an email address')
+      raise ValueError('Users must have an email address')
 
     user = self.model(
-        email=self.normalize_email(email),
+      email=self.normalize_email(email),
     )
 
     user.set_password(password)
@@ -18,8 +19,8 @@ class CustomUserManager(BaseUserManager):
 
   def create_superuser(self, email, password):
     user = self.create_user(
-        email=email,
-        password=password,
+      email=email,
+      password=password,
     )
     user.is_admin = True
     user.save(using=self._db)
@@ -31,6 +32,7 @@ class CustomUser(AbstractBaseUser):
   last_name = models.CharField(max_length=30)
   is_active = models.BooleanField(default=True)
   is_admin = models.BooleanField(default=False)
+  notifications=models.BooleanField(default=True)
 
   objects = CustomUserManager()
 

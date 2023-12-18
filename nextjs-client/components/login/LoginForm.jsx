@@ -22,8 +22,8 @@ export default function LoginForm({ styles, handleSubmit, formRef, errObj }){
     <>
       <form method='POST' ref={ formRef } onSubmit={ (e)=>{handleSubmit(e, '/users/token/', submissionObj)} } className="w-full flex flex-col">
         <div className="w-full flex flex-col my-2">
-          <label className='mb-1' htmlFor="username">Username:</label>
-          <input className="p-1 rounded-md" type='text' name='username' required/>
+          <label className='mb-1' htmlFor="Email">Email:</label>
+          <input className="p-1 rounded-md" type='text' name='email' required/>
         </div>
         <div className="w-full flex flex-col my-2">
           <label className='mb-1' htmlFor='password'>Password:</label>
