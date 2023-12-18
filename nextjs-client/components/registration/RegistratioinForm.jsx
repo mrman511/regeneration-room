@@ -1,7 +1,7 @@
 'use client'
-import { useState, useRef } from "react";
+import { useState } from "react";
 
-export default function RegistrationForm({ styles, handleSubmit,  formRef, errObj}){
+export default function RegistrationForm({ styles, handleSubmit,  formRef, errObj, transition, confirmationObj }){
   const [notifications, setNotifications] = useState(true);
 
   const validate = (formData, setErrObj) => {
@@ -12,8 +12,15 @@ export default function RegistrationForm({ styles, handleSubmit,  formRef, errOb
     setErrObj(prev=>({...error}));
   }
 
+  function responseFunction(res){
+    const confirmation = { link: { path: '/login', text: 'Login'  }, message: res.data.message };
+    confirmationObj.current=confirmation;
+    transition('CONFIRM')
+  }
+
   const submissionObj = {
-    validate: validate
+    validate: validate,
+    responseFunc: responseFunction,
   }
 
   const changeBoolValue = (e) => {
@@ -30,18 +37,18 @@ export default function RegistrationForm({ styles, handleSubmit,  formRef, errOb
       <div className="w-full flex flex-col sm:flex-row">
         <div className="w-full sm:w-1/2 flex flex-col sm:pe-1 my-2">
           <label className='mb-1' htmlFor="first_name">First Name:</label>
-          <input className="rounded-md p-0.5" type='text' name='first_name' value='Baul' required/>
+          <input className="rounded-md p-0.5" type='text' name='first_name' required/>
         </div>
 
         <div className="w-full sm:w-1/2 flex flex-col sm:ps-1 my-2">
           <label className='mb-1' htmlFor="Last_name">Last Name:</label>
-          <input className="rounded-md p-0.5" type='text' name='last_name'value='Podner' required/>
+          <input className="rounded-md p-0.5" type='text' name='last_name'required/>
         </div>
       </div>
 
       <div className="w-full flex flex-col my-2">
         <label className='mb-1' htmlFor="email">Email:</label>
-        <input className="rounded-md p-0.5" type='email' name='email' value='nobodner80@gmail.com' required/>
+        <input className="rounded-md p-0.5" type='email' name='email' required/>
       </div>
 
       <div className="relative w-full flex flex-col my-2 mt-4">
@@ -50,8 +57,7 @@ export default function RegistrationForm({ styles, handleSubmit,  formRef, errOb
         <input 
           className={["rounded-md p-0.5", (errObj.matchingPasswords ? 'border-4 border-red-500' : '')].join(' ')} 
           type='password' 
-          name='password' 
-          value='password'
+          name='password'
           required
         /> 
       </div>
@@ -61,8 +67,7 @@ export default function RegistrationForm({ styles, handleSubmit,  formRef, errOb
         <input 
           className={["rounded-md p-0.5", (errObj.matchingPasswords ? 'border-4 border-red-500' : '')].join(' ')} 
           type='password' 
-          name='confirm_password' 
-          value='password'
+          name='confirm_password'
           required
         /> 
       </div>

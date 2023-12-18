@@ -32,7 +32,7 @@ def users(request):
     user.last_name=last_name
     user.notifications=notifications
     user.save()
-    context = { 'message': 'User successfully created!' }
+    context = { 'message': f'Successfully Registered { first_name }!' }
     return Response(context, status.HTTP_201_CREATED)
 
 

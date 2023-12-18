@@ -6,7 +6,6 @@ export default function apiRequest(reqObj, responsefunc, catchFunction){
   if ( body ){
     request.push(body)
   }
-  
   axios[method](...request).then((res)=>{
     responsefunc(res);
   }).catch((err)=>{
