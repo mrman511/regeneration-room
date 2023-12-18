@@ -15,7 +15,7 @@ export default function LoginForm({ styles, handleSubmit, formRef, errObj }){
   };
 
   const submissionObj = {
-    stateFunc: setUser,
+    responseFunc: setUser,
   }
 
   return (
@@ -39,10 +39,10 @@ export default function LoginForm({ styles, handleSubmit, formRef, errObj }){
       </form>
 
       <div className="w-full mt-4">
-        <p className="my-2">Not yet registered with us?</p>
+        <p className="mb-4 mt-2">Havn't registered yet?</p>
         <Link
           href='/registration' 
-          className='border-2 border-secondary-action rounded-lg px-4 py-1'
+          className='border-2 border-secondary-action rounded-lg px-4 py-2'
         >
           Register Now!
         </Link>

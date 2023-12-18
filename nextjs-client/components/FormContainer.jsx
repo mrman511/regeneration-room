@@ -1,19 +1,21 @@
-import {useState, useRef} from 'react';
+import {useState, useRef, useEffect} from 'react';
 import { motion } from 'framer-motion';
-import postRequest from '@/utils/api-requests/postRequests';
+import apiRequest from '@/utils/api-requests/apiRequests';
 import useVisualMode from '@/utils/helpers/useVisualMode';
+import { theme } from '@/tailwind.config';
 
 import HelixLoader from './HelixLoader';
+import Confirmation from './Confirmation';
 
 export default function FormContainer({ styles, FormComponent, title }){
   const [errObj, setErrObj] = useState({});
+  const confirmationObj = useRef({ link: {path: '/', text: 'Home Page'}, message: 'Form submitted successfully. Thank You!' });
   const { mode, transition } = useVisualMode('FORM')
   const formRef = useRef();
 
   //pre defined classes
-  const container = `relative w-11/12 xs:w-10/12 sm:w-[400px] p-4 text-xl rounded-xl ${title ? '' : 'top-[20vh]'}`;
+  const container = 'relative w-[280px] xs:w-[350px] sm:w-[400px] m-4 p-4';
   const flex = 'flex flex-col justify-center items-center';
-  const colour = 'bg-primary-dark text-white';
 
   const handleSubmit = (e, path, submissionObj) => {
     e.preventDefault();
@@ -28,27 +30,48 @@ export default function FormContainer({ styles, FormComponent, title }){
         method: e.target.method,
         body: formData, 
       }
-      postRequest(reqObj, submissionObj.stateFunc)
+      apiRequest(reqObj, submissionObj.responseFunc)
     }
+  }
+
+  const getAnimations = () => {
+    const animationObj = {}
+    if (mode === 'CONFIRM'){
+      animationObj.minHeight = '300px'
+      animationObj.borderColor = theme.extend.colors['success']
+    } else if (mode === 'STATUS'){
+      animationObj.minHeight = '120px'
+      animationObj.borderColor = theme.extend.colors['secondary-trim']
+    } else {
+      animationObj.minHeight = '300px'
+      animationObj.borderColor = ['secondary-action']
+    }
+    return animationObj
   }
 
   return (
     <>
     {title && <h1 className={"relative text-6xl my-8 text-secondary-action font-cursive"}>{ title }</h1>}
-      <motion.article 
-        className={ [container, flex, colour].join(' ') }
-        animate={{ minHeight: mode === 'FORM' ? '300px' : '120px' }}
-        transition={{ height: { duration: .2 } }}
-      >
-        { mode === 'FORM' && <FormComponent 
-          styles={styles} 
-          handleSubmit={ handleSubmit }  
-          formRef={formRef} 
-          errObj={errObj} 
-          transition={ transition } />}
+      <article 
+        className={ ['bg-primary-dark text-white text-xl rounded-xl', `${title ? '' : 'top-[20vh]'}`].join(' ') }
+        >
+        <motion.div className={ [container, flex, 'border-2 border-secondary-action rounded-xl'].join(' ') }
+          animate={ getAnimations() }
+          transition={{ duration: .2 }}
+        >
+          { mode === 'FORM' && <FormComponent 
+            styles={styles} 
+            handleSubmit={ handleSubmit }  
+            formRef={formRef} 
+            errObj={errObj} 
+            transition={ transition } 
+            confirmationObj={ confirmationObj }
+            />}
 
-        { mode === 'LOADER' && <HelixLoader /> }
-      </motion.article>
+          { mode === 'LOADER' && <HelixLoader /> }
+          { mode === 'CONFIRM' && <Confirmation confirmationObj={ confirmationObj.current }/> }
+        </motion.div>
+      </article>
     </>
   );
 }

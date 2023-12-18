@@ -31,7 +31,9 @@ module.exports = {
         'primary-dark': '#1B1464',
         'primary-light': '#11A5E1',
         'secondary-action': '#F5D06F',
-        'secondary-trim': '#BA7802'
+        'secondary-trim': '#BA7802',
+        'success': '#3DE111',
+        'error': '#E14D11',
       }
     },
   },
