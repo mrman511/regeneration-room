@@ -1,4 +1,4 @@
-#!/Users/paulbodner/Documents/regeneration-room/server/env/bin/python3.11
+#!/Users/paulbodner/Documents/regeneration-room/new-server/env/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys
