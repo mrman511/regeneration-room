@@ -41,7 +41,7 @@ export default function LoginForm({ styles, handleSubmit, formRef, errObj }){
       <div className="w-full mt-4">
         <p className="mb-4 mt-2">Havn't registered yet?</p>
         <Link
-          href='/registration' 
+          href='/register' 
           className='border-2 border-secondary-action rounded-lg px-4 py-2'
         >
           Register Now!

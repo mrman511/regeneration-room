@@ -28,6 +28,9 @@ module.exports = {
         'cursive': ['var(--cursive-font)', ...fontFamily.sans]
       },
       colors:{
+        'transparent-black': '#00000080',
+        'almost-black': '#0a0724',
+        'extra-dark': '#100c3a',
         'primary-dark': '#1B1464',
         'primary-light': '#11A5E1',
         'secondary-action': '#F5D06F',
