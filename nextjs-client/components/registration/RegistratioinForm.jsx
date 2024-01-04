@@ -1,9 +1,13 @@
 'use client'
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function RegistrationForm({ styles, handleSubmit,  formRef, errObj, transition, confirmationObj }){
   const [notifications, setNotifications] = useState(true);
+  const searchParams = useSearchParams()
 
+  const email = searchParams.get('email') ? searchParams.get('email'): ''
+  
   const validate = (formData, setErrObj) => {
     const error={}
     if (formData.get('password') !== formData.get('confirm_password')){
@@ -48,7 +52,7 @@ export default function RegistrationForm({ styles, handleSubmit,  formRef, errOb
 
       <div className="w-full flex flex-col my-2">
         <label className='mb-1' htmlFor="email">Email:</label>
-        <input className="rounded-md p-0.5" type='email' name='email' required/>
+        <input className="rounded-md p-0.5" type='email' name='email' defaultValue={ email } required/>
       </div>
 
       <div className="relative w-full flex flex-col my-2 mt-4">
