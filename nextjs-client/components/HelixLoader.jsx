@@ -4,7 +4,7 @@ export default function HelixLoader(){
 
   const divs = []
   for (let i=0; i<26; i++){
-    divs.push(<div key={`HLDot-${i}`} className={ [styles.dot, 'absolute'].join(' ') }></div>)
+    divs.push(<div key={`HLDot-${i}`} className={ [styles.dot].join(' ') }></div>)
   }
 
   return(

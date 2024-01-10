@@ -11,7 +11,7 @@ export default function FormContainer({ styles, FormComponent, title }){
   const [errObj, setErrObj] = useState({});
   const confirmationObj = useRef({ link: {path: '/', text: 'Home Page'}, message: 'Form submitted successfully. Thank You!' });
   const rejectionError = useRef({})
-  const { mode, transition } = useVisualMode('FORM')
+  const { mode, transition } = useVisualMode('LOADER')
   const formRef = useRef();
 
   //pre defined classes
@@ -41,7 +41,7 @@ export default function FormContainer({ styles, FormComponent, title }){
       animationObj.minHeight = '300px'
       const colour = confirmationObj.current.error ? 'error' : 'success';
       animationObj.borderColor = theme.extend.colors[colour]
-    } else if (mode === 'STATUS'){
+    } else if (mode === 'LOADER'){
       animationObj.minHeight = '120px'
       animationObj.borderColor = theme.extend.colors['secondary-trim']
     } else {

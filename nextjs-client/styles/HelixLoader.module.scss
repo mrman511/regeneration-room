@@ -10,8 +10,7 @@ $animation-distance: 25px;
 
 .helixLoader {
   position: relative;
-  // width: 100%;
-  // height: 100%;
+  transform: translate3d(48%, -70%, 0);
 
   .dot {
     animation-name: movement;
@@ -26,7 +25,7 @@ $animation-distance: 25px;
  
     @for $i from 1 through $dot-count {
       $dot-move: ceil($i / 2);
-      $dot-pos: (($dot-size + $dot-space) * $dot-move);
+      $dot-pos: $dot-start - (($dot-size + $dot-space) * $dot-move);
       
       $animation-delay: -#{$i * .1}s;
       @if $i % 2 == 0 {

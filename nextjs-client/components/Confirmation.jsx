@@ -18,7 +18,7 @@ export default function Confirmation({ confirmationObj }){
         <Link href={ link.path } onClick={ primaryAction }>
           <button className={`px-4 py-2 border-2 ${buttonColour} hover:border-secondary-action hover:text-secondary-action rounded-lg`}>{ link.text }</button>
         </Link>
-        {altLink && 
+        { altLink && 
           <Link href={ altLink.path } onClick={ altAction } className="text-md hover:text-secondary-action">
             <p >{ altLink.text }</p>
           </Link> 
