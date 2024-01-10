@@ -17,19 +17,18 @@ export default function RegistrationForm({ styles, handleSubmit, formRef, errObj
   };
 
   function responseFunction(res){
-    const confirmation = { link: { path: '/login', text: 'Login'  }, message: res.data.message, error: false, title: 'Sucess!' };
+    const confirmation = { link: { path: '/login', text: 'Login'  }, message: res.data.detail, error: false, title: 'Sucess!' };
     confirmationObj.current=confirmation;
     transition('CONFIRM')
   };
   function catchFunction(res){
-    console.log(res);
-    const error = { link: { path: '/login', text: 'Login'  }, message: res.response.data.message,  error: true, title: 'An Error Occured' }
+    const error = { link: { path: '/login', text: 'Login'  }, message: res.response.data.detail,  error: true, title: 'An Error Occured' }
     confirmationObj.current=error;
     transition('CONFIRM')
   };
   const submissionObj = {
     validate: validate,
-    responseFunc: responseFunction,
+    responseFunction: responseFunction,
     catchFunction: catchFunction
   };
   const changeBoolValue = () => {
