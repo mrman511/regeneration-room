@@ -15,7 +15,7 @@ export default function ComingSoon({ styles }){
 
 
   return(
-    <section className="fixed w-screen h-screen flex flex-col">
+    <section className="fixed w-screen h-screen flex flex-col items-center">
       <Header styles={ styles }/>
       <div className="absolute w-full h-full">
         <Image 
@@ -29,16 +29,17 @@ export default function ComingSoon({ styles }){
           sizes='100vw'
         />
       </div>
-      <article className="text-center z-10 w-auto mt-32">
+      <div className="absolute w-full h-full bg-primary-dark-1/3"> </div>
+      <article className="text-center z-10 w-auto py-16">
         <h1 className="text-9xl mb-4 font-cursive text-secondary-action">Coming Soon</h1>
         <h3 className="text-4xl mb-2 font-semibold font-base text-secondary-action">to</h3>
         <h3 className="text-4xl font-semibold font-base text-secondary-action">Guelph, Ontario</h3>
       </article>
-      <article className="z-10 flex flex-col items-center mt-10">
-        <p className="text-xl text-center text-secondary-action">To recieve updates from regeneration room please provide us with your email below.</p>
+      <article className="w-5/6 max-sm:w-11/12 p-2 xs:p-4 z-10 flex flex-col items-center mt-10 bg-secondary-trim-2/3 rounded-xl">
+        <p className="text-xl text-center text-secondary-action">Sign up for exclusive updates, and be the first to hear about our grand opening and exciting news events!</p>
         <form action="POST" onSubmit={ handleEmailSubmission } className="flex mt-4 z-10" >
-          <input className="p-1 rounded-md w-64 me-4" type="email" name='email' placeholder="Email" required />
-          <input className='border-2 border-secondary-action rounded-lg px-4 py-1 bg-primary-dark text-white hover:cursor-pointer' type='submit' value='Login'/>
+          <input className="p-1 rounded-md w-64 max-xs:w-48 me-4" type="email" name='email' placeholder="Email" required />
+          <input className='border-2 border-secondary-action rounded-lg px-4 py-1 bg-primary-dark text-white hover:cursor-pointer' type='submit' value='Register'/>
         </form>
       </article>
     </section>

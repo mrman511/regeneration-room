@@ -2,11 +2,11 @@
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function RegistrationForm({ styles, handleSubmit,  formRef, errObj, transition, confirmationObj }){
+export default function RegistrationForm({ styles, handleSubmit, formRef, errObj, transition, confirmationObj }){
   const [notifications, setNotifications] = useState(true);
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
-  const email = searchParams.get('email') ? searchParams.get('email'): ''
+  const email = searchParams.get('email') ? searchParams.get('email'): '';
   
   const validate = (formData, setErrObj) => {
     const error={}
@@ -14,22 +14,27 @@ export default function RegistrationForm({ styles, handleSubmit,  formRef, errOb
       error.matchingPasswords = 'The two passwords provided do not match.'
     }
     setErrObj(prev=>({...error}));
-  }
+  };
 
   function responseFunction(res){
-    const confirmation = { link: { path: '/login', text: 'Login'  }, message: res.data.message };
+    const confirmation = { link: { path: '/login', text: 'Login'  }, message: res.data.message, error: false, title: 'Sucess!' };
     confirmationObj.current=confirmation;
     transition('CONFIRM')
-  }
-
+  };
+  function catchFunction(res){
+    console.log(res);
+    const error = { link: { path: '/login', text: 'Login'  }, message: res.response.data.message,  error: true, title: 'An Error Occured' }
+    confirmationObj.current=error;
+    transition('CONFIRM')
+  };
   const submissionObj = {
     validate: validate,
     responseFunc: responseFunction,
-  }
-
-  const changeBoolValue = (e) => {
+    catchFunction: catchFunction
+  };
+  const changeBoolValue = () => {
     setNotifications(!notifications);
-  }
+  };
 
   return (
     <form 

@@ -21,16 +21,24 @@ def end_points(request):
 def users(request):
   if request.method == 'POST':
     newUser = request.data.dict()
+    email = newUser['email']
     first_name=newUser['first_name']
     last_name=newUser['last_name']
     notifications = True if newUser['notifications'] == 'true' else False
+    # check if user with email exists if true return conflict error
+    user_exists = CustomUser.objects.filter(email=email)
+    if user_exists:
+      context = { 'message': 'An account with the provided email already exists.' }
+      return Response(context, status.HTTP_409_CONFLICT)
+
     user = CustomUser.objects.create_user(
-      newUser['email'],
+      email,
       newUser['password'],
     )
     user.first_name=first_name
     user.last_name=last_name
     user.notifications=notifications
+    print('****HERE****')
     user.save()
     context = { 'message': f'Successfully Registered { first_name }!' }
     return Response(context, status.HTTP_201_CREATED)
