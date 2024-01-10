@@ -10,6 +10,7 @@ import Confirmation from './Confirmation';
 export default function FormContainer({ styles, FormComponent, title }){
   const [errObj, setErrObj] = useState({});
   const confirmationObj = useRef({ link: {path: '/', text: 'Home Page'}, message: 'Form submitted successfully. Thank You!' });
+  const rejectionError = useRef({})
   const { mode, transition } = useVisualMode('FORM')
   const formRef = useRef();
 
@@ -30,7 +31,7 @@ export default function FormContainer({ styles, FormComponent, title }){
         method: e.target.method,
         body: formData, 
       }
-      apiRequest(reqObj, submissionObj.responseFunc)
+      apiRequest(reqObj, submissionObj.responseFunc, submissionObj.catchFunction)
     }
   }
 
@@ -38,7 +39,8 @@ export default function FormContainer({ styles, FormComponent, title }){
     const animationObj = {}
     if (mode === 'CONFIRM'){
       animationObj.minHeight = '300px'
-      animationObj.borderColor = theme.extend.colors['success']
+      const colour = confirmationObj.current.error ? 'error' : 'success';
+      animationObj.borderColor = theme.extend.colors[colour]
     } else if (mode === 'STATUS'){
       animationObj.minHeight = '120px'
       animationObj.borderColor = theme.extend.colors['secondary-trim']
@@ -62,10 +64,11 @@ export default function FormContainer({ styles, FormComponent, title }){
           { mode === 'FORM' && <FormComponent 
             styles={styles} 
             handleSubmit={ handleSubmit }  
-            formRef={formRef} 
-            errObj={errObj} 
+            formRef={ formRef } 
+            errObj={ errObj } 
             transition={ transition } 
             confirmationObj={ confirmationObj }
+            rejectionError={ rejectionError }
             />}
 
           { mode === 'LOADER' && <HelixLoader /> }

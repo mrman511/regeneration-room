@@ -1,14 +1,14 @@
 /** @type {import('tailwindcss').Config} */
+import themeColours from './utils/tailwind/themeColours';
+const { fontFamily } = require('tailwindcss/defaultTheme');
 
-const { fontFamily } = require('tailwindcss/defaultTheme')
-
-module.exports = {
-  content: [
+  export const content = [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
-  theme: {
+  ];
+  
+  export const theme= {
     screens: {
       'xs': '420px',
       'sm': '640px',
@@ -27,18 +27,9 @@ module.exports = {
         'base': ['adobe-jenson-pro', 'serif'],
         'cursive': ['var(--cursive-font)', ...fontFamily.sans]
       },
-      colors:{
-        'transparent-black': '#00000080',
-        'almost-black': '#0a0724',
-        'extra-dark': '#100c3a',
-        'primary-dark': '#1B1464',
-        'primary-light': '#11A5E1',
-        'secondary-action': '#F5D06F',
-        'secondary-trim': '#BA7802',
-        'success': '#3DE111',
-        'error': '#E14D11',
-      }
+      colors: themeColours
     },
-  },
-  plugins: [],
-}
+  };
+
+  export const plugins = [];
+
