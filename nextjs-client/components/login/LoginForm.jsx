@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/navigation";
 
-export default function LoginForm({ styles, handleSubmit, formRef, errObj }){
+export default function LoginForm({ styles, handleSubmit, formRef, errObj, confirmationObj, transition }){
   const [cookie, setCookie, removeCookie] = useCookies(['user']);
   const router = useRouter()
 
@@ -13,9 +13,25 @@ export default function LoginForm({ styles, handleSubmit, formRef, errObj }){
     })
     router.push('/')
   };
+  const loginError = (err) => {
+    // action for link, transition back to form on link click
+    function transitionToForm(e){
+      e.preventDefault()
+      transition('FORM')
+    }
+
+    if (err.response.status === 401){
+      const link = { path: '/login', text: 'Try Again', action: transitionToForm }
+      const altLink = { path: '/login', text: 'Forgot Password?'  }
+      const error = { link: link, altLink: altLink, message: err.response.data.detail,  error: true, title: 'An Error Occured' }
+      confirmationObj.current=error;
+      transition('CONFIRM')
+    }
+  }
 
   const submissionObj = {
-    responseFunc: setUser,
+    responseFunction: setUser,
+    catchFunction: loginError,
   }
 
   return (

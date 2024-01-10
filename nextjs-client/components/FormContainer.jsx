@@ -31,7 +31,7 @@ export default function FormContainer({ styles, FormComponent, title }){
         method: e.target.method,
         body: formData, 
       }
-      apiRequest(reqObj, submissionObj.responseFunc, submissionObj.catchFunction)
+      apiRequest(reqObj, submissionObj.responseFunction, submissionObj.catchFunction)
     }
   }
 

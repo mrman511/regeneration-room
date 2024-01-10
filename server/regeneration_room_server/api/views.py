@@ -28,7 +28,7 @@ def users(request):
     # check if user with email exists if true return conflict error
     user_exists = CustomUser.objects.filter(email=email)
     if user_exists:
-      context = { 'message': 'An account with the provided email already exists.' }
+      context = { 'detail': 'An account with the provided email already exists.' }
       return Response(context, status.HTTP_409_CONFLICT)
 
     user = CustomUser.objects.create_user(
@@ -38,9 +38,8 @@ def users(request):
     user.first_name=first_name
     user.last_name=last_name
     user.notifications=notifications
-    print('****HERE****')
     user.save()
-    context = { 'message': f'Successfully Registered { first_name }!' }
+    context = { 'detail': f'Successfully Registered { first_name }!' }
     return Response(context, status.HTTP_201_CREATED)
 
 
