@@ -13,14 +13,14 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
   background: linear-gradient( 189deg,
-    rgb(var(--background-start-rgb)) 10%,
-    rgb(var(--background-mid-one-rgb)) 35%,
+  rgb(var(--background-start-rgb)) -150%,
+  rgb(var(--background-end-rgb)),
+  rgb(var(--background-start-rgb)) 250% 
+    /* rgb(var(--background-mid-one-rgb)) 35%,
     rgb(var(--background-mid-two-rgb)) 50%,
     rgb(var(--background-mid-three-rgb)) 60%,
-    rgb(var(--background-mid-four-rgb)) 75%,
-    rgb(var(--background-end-rgb)) 95%
+    rgb(var(--background-mid-four-rgb)) 75%, */
   );
 }
 
