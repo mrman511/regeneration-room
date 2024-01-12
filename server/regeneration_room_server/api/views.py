@@ -1,12 +1,8 @@
-from django.core.mail import send_mail
-from django.conf import settings
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from users.models import CustomUser
 from users.serializers import CustomUserSerializer
-from email_templates import welcome_template
-
 
 import pprint
 pprint = pprint.PrettyPrinter(indent=4).pprint
@@ -29,11 +25,12 @@ def users(request):
     first_name=newUser['first_name']
     last_name=newUser['last_name']
     notifications = True if newUser['notifications'] == 'true' else False
-    # send conflict response if email is already registered
-    if CustomUser.objects.filter(email=email):
+    # check if user with email exists if true return conflict error
+    user_exists = CustomUser.objects.filter(email=email)
+    if user_exists:
       context = { 'detail': 'An account with the provided email already exists.' }
       return Response(context, status.HTTP_409_CONFLICT)
-    # create new user
+
     user = CustomUser.objects.create_user(
       email,
       newUser['password'],
@@ -42,20 +39,10 @@ def users(request):
     user.last_name=last_name
     user.notifications=notifications
     user.save()
-
-    # send email after user is created
-    send_mail(
-      welcome_template.subject,
-      welcome_template.message,
-      settings.EMAIL_HOST_USER,
-      [user.email],
-      fail_silently=False
-    )
-    # return successful message
     context = { 'detail': f'Successfully Registered { first_name }!' }
     return Response(context, status.HTTP_201_CREATED)
 
-  # return all users as json response
+
   users = CustomUser.objects.all();
   serializer = CustomUserSerializer(users, many=True)
   return Response(serializer.data)

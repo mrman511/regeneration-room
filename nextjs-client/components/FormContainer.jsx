@@ -1,5 +1,4 @@
-'use client'
-import {useState, useRef} from 'react';
+import {useState, useRef, useEffect} from 'react';
 import { motion } from 'framer-motion';
 import apiRequest from '@/utils/api-requests/apiRequests';
 import useVisualMode from '@/utils/helpers/useVisualMode';
@@ -12,7 +11,7 @@ export default function FormContainer({ styles, FormComponent, title }){
   const [errObj, setErrObj] = useState({});
   const confirmationObj = useRef({ link: {path: '/', text: 'Home Page'}, message: 'Form submitted successfully. Thank You!' });
   const rejectionError = useRef({})
-  const { mode, transition } = useVisualMode('FORM')
+  const { mode, transition } = useVisualMode('LOADER')
   const formRef = useRef();
 
   //pre defined classes
@@ -39,14 +38,14 @@ export default function FormContainer({ styles, FormComponent, title }){
   const getAnimations = () => {
     const animationObj = {}
     if (mode === 'CONFIRM'){
-      animationObj.minHeight = '200px'
+      animationObj.minHeight = '300px'
       const colour = confirmationObj.current.error ? 'error' : 'success';
       animationObj.borderColor = theme.extend.colors[colour]
     } else if (mode === 'LOADER'){
       animationObj.minHeight = '120px'
       animationObj.borderColor = theme.extend.colors['secondary-trim']
     } else {
-      animationObj.minHeight = '200px'
+      animationObj.minHeight = '300px'
       animationObj.borderColor = ['secondary-action']
     }
     return animationObj
@@ -63,9 +62,9 @@ export default function FormContainer({ styles, FormComponent, title }){
           transition={{ duration: .2 }}
         >
           { mode === 'FORM' && <FormComponent 
-            ref={ formRef } 
             styles={styles} 
             handleSubmit={ handleSubmit }  
+            formRef={ formRef } 
             errObj={ errObj } 
             transition={ transition } 
             confirmationObj={ confirmationObj }
