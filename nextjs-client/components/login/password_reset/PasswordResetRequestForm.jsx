@@ -3,7 +3,7 @@ import React from "react";
 const PasswordResetRequestForm = React.forwardRef(( {handleSubmit, transition, confirmationObj}, ref )=>{
 
   function responseFunction(){
-    const confirmation = { link: { path: '/login', text: 'Login'  } , message: 'Check if your email for a link to reset your password', error: false, title: 'Sucess!' };
+    const confirmation = { link: { path: '/login', text: 'Login'  } , message: 'Check your email for a link to reset your password.', error: false, title: 'Success!' };
     confirmationObj.current=confirmation;
     transition('CONFIRM')
   };
