@@ -1,9 +1,8 @@
 'use client'
-import React from "react";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-const RegistrationForm = React.forwardRef(({ styles, handleSubmit, errObj, transition, confirmationObj }, ref) =>{
+export default function RegistrationForm({ styles, handleSubmit, formRef, errObj, transition, confirmationObj }){
   const [notifications, setNotifications] = useState(true);
   const searchParams = useSearchParams();
 
@@ -18,7 +17,7 @@ const RegistrationForm = React.forwardRef(({ styles, handleSubmit, errObj, trans
   };
 
   function responseFunction(res){
-    const confirmation = { link: { path: '/login', text: 'Login'  }, message: res.data.detail, error: false, title: 'Success!' };
+    const confirmation = { link: { path: '/login', text: 'Login'  }, message: res.data.detail, error: false, title: 'Sucess!' };
     confirmationObj.current=confirmation;
     transition('CONFIRM')
   };
@@ -39,7 +38,7 @@ const RegistrationForm = React.forwardRef(({ styles, handleSubmit, errObj, trans
   return (
     <form 
       method='POST' 
-      ref={ ref } 
+      ref={ formRef } 
       onSubmit={ (e) => { handleSubmit(e, '/users/', submissionObj) } } 
       className="w-full flex flex-col"
     >
@@ -82,15 +81,13 @@ const RegistrationForm = React.forwardRef(({ styles, handleSubmit, errObj, trans
       </div>
 
       <div className="w-full my-2">
-        <input onClick={ changeBoolValue } onChange={()=>{}} className="me-2 h-4 w-4" type='checkbox' name='notifications' checked={ notifications } value={ notifications }/>
+        <input onClick={ changeBoolValue } className="me-2 h-4 w-4" type='checkbox' name='notifications' checked={ notifications } value={ notifications }/>
         <label className='text-base' htmlFor='notifications' >I would like to recieve updates and notifications from Regeneration Room</label>
       </div>
 
       <div>
-        <input className='border-2 border-secondary-action text-white rounded-lg px-4 py-1 hover:cursor-pointer hover:text-secondary-action' type='submit' value='Register'/>
+        <input className='border-2 border-secondary-action text-white rounded-lg px-4 py-1 hover:cursor-pointer' type='submit' value='Register'/>
       </div>
     </form>
   );
-});
-
-export default RegistrationForm;
+}
