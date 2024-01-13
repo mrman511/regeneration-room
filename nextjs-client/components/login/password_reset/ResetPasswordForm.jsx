@@ -1,4 +1,8 @@
-export default function ResetPasswordForm({ styles, handleSubmit, formRef, errObj, transition, confirmationObj }){
+import React from "react";
+import { useCookies } from "react-cookie";
+
+const ResetPasswordForm = React.forwardRef(({ handleSubmit, errObj, transition, confirmationObj }, ref) => {
+  const [cookies, setCookie, removeCookie] = useCookies(['refresh_token']);
 
   const validate = (formData, setErrObj) => {
     const error={}
@@ -14,7 +18,7 @@ export default function ResetPasswordForm({ styles, handleSubmit, formRef, errOb
     transition('CONFIRM')
   };
   function catchFunction(res){
-    const error = { link: { path: '/login?mode=FORGOTPASSWORD', text: 'Try Again'  }, message: res.response.data.detail,  error: true, title: 'An Error Occured' }
+    const error = { link: { path: '/login/password_reset', text: 'Try Again'  }, message: res.response.data.detail,  error: true, title: 'An Error Occured' }
     confirmationObj.current=error;
     transition('CONFIRM')
   };
@@ -27,13 +31,13 @@ export default function ResetPasswordForm({ styles, handleSubmit, formRef, errOb
   return (
     <form 
       method='POST' 
-      ref={ formRef } 
+      ref={ ref } 
       onSubmit={ (e) => { handleSubmit(e, '/users/reset_password', submissionObj) } } 
       className="w-full flex flex-col"
     >
       <div className="relative w-full flex flex-col my-2 mt-4">
         { errObj.matchingPasswords && <p className="absolute -translate-y-3/4 top-0 text-sm text-red-500">*{ errObj.matchingPasswords }</p> }
-        <label className='mb-1' htmlFor='password'>Password:</label>
+        <label className='mb-1' htmlFor='password'>New Password:</label>
         <input 
           className={["rounded-md p-0.5", (errObj.matchingPasswords ? 'border-4 border-red-500' : '')].join(' ')} 
           type='password' 
@@ -42,8 +46,8 @@ export default function ResetPasswordForm({ styles, handleSubmit, formRef, errOb
         /> 
       </div>
 
-      <div className="w-full flex flex-col my-2">
-        <label className='mb-1' htmlFor='confirm-password'>Confirm Password:</label>
+      <div className="w-full flex flex-col mt-2 mb-4">
+        <label className='mb-1' htmlFor='confirm-password'>Confirm New Password:</label>
         <input 
           className={["rounded-md p-0.5", (errObj.matchingPasswords ? 'border-4 border-red-500' : '')].join(' ')} 
           type='password' 
@@ -56,5 +60,7 @@ export default function ResetPasswordForm({ styles, handleSubmit, formRef, errOb
         <input className='border-2 border-secondary-action text-white rounded-lg px-4 py-1 hover:cursor-pointer hover:text-secondary-action' type='submit' value='Register'/>
       </div>
     </form>
-  )
-}
+  );
+});
+
+export default ResetPasswordForm;
