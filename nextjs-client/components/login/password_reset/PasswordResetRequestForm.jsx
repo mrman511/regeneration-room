@@ -21,12 +21,13 @@ const PasswordResetRequestForm = React.forwardRef(( {handleSubmit, transition, c
         onSubmit={ (e) => { handleSubmit(e, '/users/reset_password', submissionObj) } } 
         className="w-full flex flex-col"
       >
+        <p className="text-center text-sm mb-4">Provide your email below. If an account with the provided email exists, an email with a link to change your password will be sent to that email.</p>
         <div className="w-full flex flex-col mb-4">
           <label className='mb-1' htmlFor="Email">Email:</label>
           <input className="p-1 rounded-md" type='text' name='email' required/>
         </div>
         <div>
-          <input className='border-2 border-secondary-action rounded-lg px-4 py-1 text-white hover:cursor-pointer hover:text-secondary-action' type='submit' value='Send Request'/>
+          <input className='border-2 border-secondary-action rounded-lg px-4 py-1 text-white hover:cursor-pointer hover:text-secondary-action' type='submit' value='Request Password Reset'/>
         </div>
       </form>
     </>

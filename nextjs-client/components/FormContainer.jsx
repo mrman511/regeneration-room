@@ -20,10 +20,11 @@ export default function FormContainer({ styles, FormComponent, title }){
   const flex = 'flex flex-col justify-center items-center';
 
   const handleSubmit = (e, path, submissionObj) => {
+    const { validate, responseFunction, catchFunction } = submissionObj
     e.preventDefault();
     const formData = new FormData(formRef.current);
-    if (submissionObj.validate){
-      submissionObj.validate(formData, setErrObj);
+    if (validate){
+      validate(formData, setErrObj);
     }
     if (Object.keys(errObj).length === 0){
       transition('LOADER')
@@ -32,7 +33,7 @@ export default function FormContainer({ styles, FormComponent, title }){
         method: e.target.method,
         body: formData, 
       }
-      apiRequest(reqObj, submissionObj.responseFunction, submissionObj.catchFunction)
+      apiRequest(reqObj, responseFunction, catchFunction)
     }
   }
 
