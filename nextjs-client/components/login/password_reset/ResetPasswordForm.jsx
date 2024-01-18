@@ -32,7 +32,7 @@ const ResetPasswordForm = React.forwardRef(({ handleSubmit, errObj, transition, 
     <form 
       method='POST' 
       ref={ ref } 
-      onSubmit={ (e) => { handleSubmit(e, '/users/reset_password', submissionObj) } } 
+      onSubmit={ (e) => { handleSubmit(e, '/users/reset_password/', submissionObj) } } 
       className="w-full flex flex-col"
     >
       <div className="relative w-full flex flex-col my-2 mt-4">

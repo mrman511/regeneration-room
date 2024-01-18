@@ -59,3 +59,12 @@ def users(request):
   users = CustomUser.objects.all();
   serializer = CustomUserSerializer(users, many=True)
   return Response(serializer.data)
+
+@api_view(['POST'])
+def reset_password(request):
+  data = request.data.dict()
+  if data['email']:
+    send_mail('reset password', 'resetPassword for email', settings.EMAIL_HOST_USER, [data['email']], fail_silently=False)
+
+
+  return Response({}, status.HTTP_200_OK)

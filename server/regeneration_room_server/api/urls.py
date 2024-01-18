@@ -10,6 +10,7 @@ urlpatterns = [
   path('', views.end_points),
 
   path('users/', views.users),
+  path('users/reset_password/', views.reset_password),
   path('users/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
   path('users/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
