@@ -18,7 +18,7 @@ const PasswordResetRequestForm = React.forwardRef(( {handleSubmit, transition, c
       <form 
         method='POST' 
         ref={ ref } 
-        onSubmit={ (e) => { handleSubmit(e, '/users/reset_password', submissionObj) } } 
+        onSubmit={ (e) => { handleSubmit(e, '/users/reset_password/', submissionObj) } } 
         className="w-full flex flex-col"
       >
         <p className="text-center text-sm mb-4">Provide your email below. If an account with the provided email exists, an email with a link to change your password will be sent to that email.</p>
