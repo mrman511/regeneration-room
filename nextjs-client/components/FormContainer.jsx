@@ -20,7 +20,7 @@ export default function FormContainer({ styles, FormComponent, title }){
   const flex = 'flex flex-col justify-center items-center';
 
   const handleSubmit = (e, path, submissionObj) => {
-    const { validate, responseFunction, catchFunction } = submissionObj
+    const { validate, responseFunction, catchFunction, method } = submissionObj
     e.preventDefault();
     const formData = new FormData(formRef.current);
     if (validate){
@@ -30,7 +30,7 @@ export default function FormContainer({ styles, FormComponent, title }){
       transition('LOADER')
       const reqObj ={
         path: path,
-        method: e.target.method,
+        method: method ? method : e.target.method,
         body: formData, 
       }
       apiRequest(reqObj, responseFunction, catchFunction)
