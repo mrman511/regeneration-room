@@ -4,13 +4,22 @@ import FormContainer from "@/components/FormContainer";
 import PasswordResetRequestForm from "@/components/login/password_reset/PasswordResetRequestForm";
 import ResetPasswordForm from "./ResetPasswordForm";
 
-export default function PasswordResetPage({styles, refreshToken}){
-  const [cookies, setCookie, removeCookie] = useCookies(['refresh_token']);
-  if (refreshToken) setCookie('refresh_token', refreshToken, { maxAge: 60*60 });
+export default function PasswordResetPage({styles, searchParams}){
+  const [cookies, setCookie, removeCookie] = useCookies();
+  if (searchParams.pk){
+    const {pk, token} = searchParams;
+    setCookie('pk', pk);
+    setCookie('reset_token', token)
+  }
 
   return (
     <>
-      <FormContainer styles={ styles } FormComponent={ refreshToken ? ResetPasswordForm : PasswordResetRequestForm } title={ 'Request Password Reset' } />
+      <FormContainer 
+        styles={ styles } 
+        FormComponent={ searchParams.pk ? ResetPasswordForm : PasswordResetRequestForm } 
+        title={ 'Request Password Reset' } 
+        searchParams={ searchParams } 
+      />
     </>
   );
 }

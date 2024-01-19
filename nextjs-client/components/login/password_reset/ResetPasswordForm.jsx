@@ -2,7 +2,8 @@ import React from "react";
 import { useCookies } from "react-cookie";
 
 const ResetPasswordForm = React.forwardRef(({ handleSubmit, errObj, transition, confirmationObj }, ref) => {
-  const [cookies, setCookie, removeCookie] = useCookies(['refresh_token']);
+  const [cookies, setCookie, removeCookie] = useCookies();
+  const {pk, reset_token} = cookies
 
   const validate = (formData, setErrObj) => {
     const error={}
@@ -11,9 +12,8 @@ const ResetPasswordForm = React.forwardRef(({ handleSubmit, errObj, transition, 
     }
     setErrObj(prev=>({...error}));
   };
-
   function responseFunction(res){
-    const confirmation = { link: { path: '/login', text: 'Login'  }, message: res.data.detail, error: false, title: 'Sucess!' };
+    const confirmation = { link: { path: '/login', text: 'Login'  }, message: res.data.detail, error: false, title: 'Success!' };
     confirmationObj.current=confirmation;
     transition('CONFIRM')
   };
@@ -25,14 +25,15 @@ const ResetPasswordForm = React.forwardRef(({ handleSubmit, errObj, transition, 
   const submissionObj = {
     validate: validate,
     responseFunction: responseFunction,
-    catchFunction: catchFunction
+    catchFunction: catchFunction,
+    method: 'patch'
   };
 
   return (
     <form 
-      method='POST' 
+      method='PATCH' 
       ref={ ref } 
-      onSubmit={ (e) => { handleSubmit(e, '/users/reset_password/', submissionObj) } } 
+      onSubmit={ (e) => { handleSubmit(e, `/users/reset_password/${pk}/${reset_token}/`, submissionObj) } } 
       className="w-full flex flex-col"
     >
       <div className="relative w-full flex flex-col my-2 mt-4">
@@ -57,7 +58,7 @@ const ResetPasswordForm = React.forwardRef(({ handleSubmit, errObj, transition, 
       </div>
 
       <div>
-        <input className='border-2 border-secondary-action text-white rounded-lg px-4 py-1 hover:cursor-pointer hover:text-secondary-action' type='submit' value='Register'/>
+        <input className='border-2 border-secondary-action text-white rounded-lg px-4 py-1 hover:cursor-pointer hover:text-secondary-action' type='submit' value='Reset Password'/>
       </div>
     </form>
   );

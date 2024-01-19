@@ -11,6 +11,7 @@ export default function handleUserCookies(){
   }
 
   function logout (){
+    console.log('here');
     removeCookie('user')
   }
 

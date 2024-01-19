@@ -9,8 +9,10 @@ from email_templates import welcome_template
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.core.mail import send_mail, EmailMessage
 from django.template.loader import render_to_string
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
+from users.serializers import ResetPasswordSerializer
+from django.urls import reverse
 
 
 import pprint
@@ -65,22 +67,27 @@ def users(request):
   serializer = CustomUserSerializer(users, many=True)
   return Response(serializer.data)
 
-@api_view(['POST'])
-def reset_password(request):
+@api_view(['POST', 'PATCH'])
+def reset_password(request, encoded_pk=None, token=None):
   data = request.data.dict()
-  if data['email']:
+  if request.method=='PATCH':
+    serializer = ResetPasswordSerializer(data=request.data, context={"kwargs": { 'encoded_pk': encoded_pk, "token": token }})
+    serializer.is_valid(raise_exception=True)
+    return Response({'details': 'Password reset accepted' }, status.HTTP_202_ACCEPTED)
+  
+  if request.method=='POST':
     # get user and encode user pk and generate password reset token
     user = CustomUser.objects.get(email=data['email'])
     encoded_pk = urlsafe_base64_encode(force_bytes(user.pk))
     token = PasswordResetTokenGenerator().make_token(user)
     # create password reset-link URL
-    url = settings.CLIENT_PATH + f'login/password_reset/${ encoded_pk }/{token}/'
-    print(url)
-
+    url = settings.CLIENT_PATH + f'login/password_reset?pk=${ encoded_pk }&token={token}'
     # send email
     message = render_to_string('email_templates/reset_password.html', { "url": url })
     email=EmailMessage('Reset Password', message, to=[data['email']])
     email.content_subtype='html'
     email.send()
+    return Response({}, status.HTTP_200_OK)
+  
 
   return Response({}, status.HTTP_200_OK)
