@@ -31,6 +31,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# current path for client side rendering
+CLIENT_PATH='http://localhost:3000/'
 
 # Application definition
 
@@ -109,7 +111,7 @@ ROOT_URLCONF = 'regeneration_room_server.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

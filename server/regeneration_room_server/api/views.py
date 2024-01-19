@@ -1,4 +1,3 @@
-from django.core.mail import send_mail
 from django.conf import settings
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -6,6 +5,12 @@ from rest_framework import status
 from users.models import CustomUser
 from users.serializers import CustomUserSerializer
 from email_templates import welcome_template
+
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.core.mail import send_mail, EmailMessage
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes
 
 
 import pprint
@@ -64,7 +69,18 @@ def users(request):
 def reset_password(request):
   data = request.data.dict()
   if data['email']:
-    send_mail('reset password', 'resetPassword for email', settings.EMAIL_HOST_USER, [data['email']], fail_silently=False)
+    # get user and encode user pk and generate password reset token
+    user = CustomUser.objects.get(email=data['email'])
+    encoded_pk = urlsafe_base64_encode(force_bytes(user.pk))
+    token = PasswordResetTokenGenerator().make_token(user)
+    # create password reset-link URL
+    url = settings.CLIENT_PATH + f'login/password_reset/${ encoded_pk }/{token}/'
+    print(url)
 
+    # send email
+    message = render_to_string('email_templates/reset_password.html', { "url": url })
+    email=EmailMessage('Reset Password', message, to=[data['email']])
+    email.content_subtype='html'
+    email.send()
 
   return Response({}, status.HTTP_200_OK)
