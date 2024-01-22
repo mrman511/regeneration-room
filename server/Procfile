@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath regeneration_room_server regeneration_room_server.wsgi
