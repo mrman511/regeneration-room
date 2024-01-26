@@ -30,7 +30,9 @@ export default function ComingSoon({ styles }){
             objectFit: 'cover',
             objectPosition: '20%'
            }}
-          sizes='100vw'
+           quality={ 90 }
+          sizes='(max-width: 100%) 100vw, 100%'
+          placeholder="blur"
         />
       </div>
       <div className="absolute w-full h-full bg-primary-dark-1/3"> </div>
