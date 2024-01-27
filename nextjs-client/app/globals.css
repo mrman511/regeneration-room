@@ -22,7 +22,7 @@ body {
     rgb(var(--background-mid-three-rgb)) 60%,
     rgb(var(--background-mid-four-rgb)) 75%, */
   );
-  min-height: 110vh;
+  min-height: 120vh;
 }
 
 input {
