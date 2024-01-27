@@ -18,7 +18,7 @@ export default function ComingSoon({ styles }){
 
 
   return(
-    <section className="fixed w-screen h-screen flex flex-col items-center">
+    <section className="relative w-screen min-h-[120vh] flex flex-col items-center">
       <Header styles={ styles }/>
       <div className="absolute w-full h-full">
         <Image 
