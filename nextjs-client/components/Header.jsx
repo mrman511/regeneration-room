@@ -10,10 +10,27 @@ import logoFull from '@/public/logo/logo-full.svg'
 import Navigation from "./Navigation";
 
 import handleUserCookies from "@/utils/helpers/handleUserCookies";
+import apiRequest from "@/utils/api-requests/apiRequests";
+import { useEffect, useState } from "react";
 
 export default function Header({ styles }){
   const [showMenu, setShowMenu] = useCycle(false, true);
+  const [user, setUser] = useState(undefined)
   const { cookies, logout } = handleUserCookies()
+
+
+  useEffect(()=>{
+    if (cookies.user && !user){
+      const request = {
+        path: '/user/',
+        method: 'get',
+        headers: {
+          Authorization: `Bearer ${cookies.user}`
+        },
+      }
+      apiRequest(request, (res)=>{setUser(res.data)}, console.log)
+    }
+  })
   
   return (
     <header className={ [ "w-screen h-32 lg:h-48 flex items-center justify-between z-10 bg-almost-black-1/3"].join(' ')}>
