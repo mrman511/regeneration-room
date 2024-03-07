@@ -19,7 +19,7 @@ export default function McButton({styles, showNav, toggleShowNav}){
   }
 
   return (
-    <div className="relative w-8 h-6 me-6 z-20" onClick={toggleShowNav}>
+    <div className="md:hidden relative w-8 h-6 me-6 z-20" onClick={toggleShowNav}>
       <motion.div className="absolute w-8 h-0.5 bg-secondary-action"
         animate={{
           top: showNav ? '50%' : '0%',
