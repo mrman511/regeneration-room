@@ -17,7 +17,7 @@ const navRoutes = [
   },
   {
     name: 'Appoinments',
-    path: '',
+    path: '/appointments',
   },
 ]
 

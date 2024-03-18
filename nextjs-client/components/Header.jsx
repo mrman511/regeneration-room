@@ -36,7 +36,7 @@ export default function Header({ styles }){
   })
   
   return (
-    <header className={ [ "relative w-screen h-32 flex items-center justify-between z-20 bg-almost-black-2/3"].join(' ')}>
+    <header className={ [ "relative w-screen h-32 md:mb-12 flex items-center justify-between z-20 bg-almost-black-2/3"].join(' ')}>
       <Link href='/' className='flex w-auto items-center ms-[5%] sm:ms-4 z-20'>
         <div className="relative max-sm:h-24 max-sm:w-44 h-32 w-60 ">
             <Image 

@@ -23,7 +23,7 @@ const RegistrationForm = React.forwardRef(({ styles, handleSubmit, errObj, trans
     transition('CONFIRM')
   };
   function catchFunction(res){
-    const error = { link: { path: '/login', text: 'Login'  }, message: res.response.data.detail,  error: true, title: 'An Error Occured' }
+    const error = { link: { path: '/login', text: 'Login'  }, message: res.response.data.detail,  error: true, title: 'An Error Occured.' }
     confirmationObj.current=error;
     transition('CONFIRM')
   };
