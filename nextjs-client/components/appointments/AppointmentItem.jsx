@@ -13,7 +13,7 @@ export default function AppointmentItem({styles, appointment, setAppointmentData
   }
   
   return (
-    <article className="w-full max-w-[320px] my-1 flex h-24 border border- border-primary-light rounded-md">
+    <article className="relative w-full max-w-[320px] my-1 flex h-24 border border- border-primary-light rounded-md">
       <section className="w-[125px] p-2 flex flex-col items-center border-e-2 border-gray-200">
         <h4 className="text-xl">{ appointmentDateTime.toLocaleString('default', { month: 'long' }) }</h4>
         <hr />
@@ -22,7 +22,7 @@ export default function AppointmentItem({styles, appointment, setAppointmentData
           <h3 className="text-4xl font-semibold">{ appointmentDateTime.getUTCDate() }</h3>
         </div>
       </section>
-      <section className="relative min-h-full flex flex-col px-3 mx-2 items-center">
+      <section className="relative min-h-full flex flex-col ps-3 ms-2 items-center">
         <div className="grow-0">
           <p>{ appointmentStartTime } - { appointmentEndTime }</p>
         </div>
@@ -30,7 +30,7 @@ export default function AppointmentItem({styles, appointment, setAppointmentData
           <h3><span className="text-4xl font-semibold">{appointment.duration}</span> min.</h3>
         </div>
       </section>
-      <section className="relative h-full p-2 py-4 flex flex-col items-center justify-between">
+      <section className="absolute right-0 h-full pe-2 py-4 flex flex-col items-center justify-between">
         <button className="hover:pointer-cursor" onClick={ editAppointment }>
           <FontAwesomeIcon className="w-5 h-5" icon={ faPenToSquare } />
         </button>

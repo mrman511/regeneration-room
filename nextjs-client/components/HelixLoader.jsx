@@ -9,7 +9,7 @@ export default function HelixLoader(){
 
   return(
     <div className={[styles.helixLoader, 'relative w-full'].join(' ') }>
-      { divs }
+      { divs.length > 0 ? divs : <></> }
     </div>
   );
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from "react";
 import RsuiteCalendar from "../calendar/RsuiteCalendar";
 import FormContainer from "../FormContainer";
@@ -5,14 +7,16 @@ import AppointmentForm from "./appointmentform";
 import HelixLoader from "../HelixLoader";
 import useVisualMode from "@/utils/helpers/useVisualMode";
 
-export default function BookAppointment({styles, hours, headers, appointmentData}){
+export default function BookAppointment({styles, hours, headers, appointmentData, setAppointments}){
   const [dateTime, setDateTime] = useState();
-  const [dayHours, setDayHours] = useState(undefined)
+  const [dayHours, setDayHours] = useState(undefined);
 
-  const {mode, transition}=useVisualMode('CALENDAR')
+  // const {mode, transition}=useVisualMode('LOADER')
+  const {mode, transition}=useVisualMode('CALENDAR');
 
   const formData = {
     data: appointmentData,
+    setAppointments: setAppointments,
     dateTime: dateTime,
     setDateTime: setDateTime,
     hours: dayHours,
@@ -51,16 +55,16 @@ export default function BookAppointment({styles, hours, headers, appointmentData
           close: new Date(`${dateTime.toDateString()} ${hours.closing_hours[i]}`),
           isOpen: true,
         };
-        // for (let holiday of hours.holiday_hours){
-        //   // set hours to holidayhours is selected date is in list of holidays
-        //   // let holiDate = holiday.date.replace(/-/g, '\/');
-        //   // holiDate = new Date(holiDate);
-        //   // if (holiDate.toDateString() === dateTime.toDateString()){
-        //   //   givenHours.open = new Date(`${holiDate.toDateString()} ${holiday.opening_hours}`);
-        //   //   givenHours.close = new Date(`${holiDate.toDateString()} ${holiday.closing_hours}`);
-        //   //   givenHours.isOpen = holiday.is_open;
-        //   // };
-        // };
+        for (let holiday of hours.holiday_hours){
+          // set hours to holidayhours is selected date is in list of holidays
+          let holiDate = holiday.date.replace(/-/g, '\/');
+          holiDate = new Date(holiDate);
+          if (holiDate.toDateString() === dateTime.toDateString()){
+            givenHours.open = new Date(`${holiDate.toDateString()} ${holiday.opening_hours}`);
+            givenHours.close = new Date(`${holiDate.toDateString()} ${holiday.closing_hours}`);
+            givenHours.isOpen = holiday.is_open;
+          };
+        };
         // if store hours are not set or open hours change after date change
         if (!dayHours || (givenHours.open.toTimeString() !== dayHours.open.toTimeString() || givenHours.close.toTimeString() !== dayHours.close.toTimeString())){
           if (!appointmentData){
@@ -76,13 +80,13 @@ export default function BookAppointment({styles, hours, headers, appointmentData
   return (
     <section 
       key={ appointmentData ? `edit-${appointmentData.id}`: 'appointmentBooking'} 
-      className="relative h-full py-4 sm:px-4 flex flex-col items-center">
+      className="relative w-full py-4 mt-6 mb-4 sm:px-4 flex flex-col items-center bg-white shadow-card">
       <div>
         <h2 className="font-cursive text-5xl font-semibold">Book Now</h2>
       </div>
-      <div className="relative w-[320px] sm:w-[340px] h-full mt-10 flex grow">
+      <div className="relative h-auto flex items-center justify-center">
         { mode ==='CALENDAR' && <RsuiteCalendar select={ onDateSelect }/> }
-        { mode === 'LOADER' && <div className="relative w-full mx-8 h-72 flex items-center"><HelixLoader /></div> }
+        { mode === 'LOADER' && <div className="relative w-full mx-8 h-48 flex items-center"><HelixLoader /></div> }
         { (mode ==='FORM' && dayHours) && <FormContainer FormComponent={ AppointmentForm } formData={formData}/> }
       </div>
     </section>

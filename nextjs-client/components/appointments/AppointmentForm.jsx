@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import { useEffect } from 'react';
 import { motion, useCycle } from 'framer-motion';
@@ -22,6 +23,7 @@ const AppointmentForm = React.forwardRef((props, ref) =>{
 
   const {
     data,
+    setAppointments,
     dateTime,
     setDateTime,
     hours,
@@ -52,12 +54,14 @@ const AppointmentForm = React.forwardRef((props, ref) =>{
         error: false, 
         title: 'Appointment Booked!' 
       };
-      confirmationObj.current = confirmation
+      confirmationObj.current = confirmation;
+      setAppointments(null);
       transition('CONFIRM');
     };
   };
 
   function catchFunction(err){
+    console.log(err);
     const error = { 
       link: { path: '/appointments', text: 'Try Another Time', action: ()=>{ transition('FORM') } }, 
       message: err.response.data.non_field_errors[0], 
@@ -65,11 +69,11 @@ const AppointmentForm = React.forwardRef((props, ref) =>{
       title: 'An Error Occured.' 
     };
     confirmationObj.current = error;
-    transition("CONFIRM")
+    transition("CONFIRM");
   };
 
   const submissionObj = {
-    method: 'patch',
+    method: data ? 'patch' : 'post',
     headers: headers,
     responseFunction: responseFunction,
     catchFunction: catchFunction,
@@ -82,15 +86,6 @@ const AppointmentForm = React.forwardRef((props, ref) =>{
     ref.current.time.value = convert12To24HourFormat(ref.current.time.value);
     handleSubmit(e, path, submissionObj);
   };
-
-  const css = `
-    .react-datepicker__time-list-item--disabled{
-      display: none !important;
-    }
-    .react-datepicker__input-container input{
-      padding: .25rem !important;
-    }
-  `;
 
   useEffect(()=>{
     // change duration to 30 if duration is 60 and last appointment time is chosen
@@ -105,11 +100,9 @@ const AppointmentForm = React.forwardRef((props, ref) =>{
       method={ data ? 'PATCH' : 'POST' }
       ref={ ref }
       onSubmit={ (e)=>{formatSubmission(e)} }
-
-     className='w-full h-full flex flex-col justify-evenly'
+      className='my-2 flex flex-col justify-evenly'
     >
-      <style>{ css }</style>
-      <div className='w-auto flex justify-between'>
+      <div className='w-auto flex flex-wrap justify-between'>
         <div className='flex w-[47.5%] flex-col bg-transparent'>
           <label className='text-white mb-1' htmlFor="date">Date</label>
           <DatePicker
@@ -146,7 +139,7 @@ const AppointmentForm = React.forwardRef((props, ref) =>{
           value={ duration }
         />
 
-        <div className='relatve  w-56 my-2 flex justify-start items-end'>
+        <div className='relatve w-56 my-2 flex justify-start items-end'>
           <motion.div
             onClick={ handleDuration }
             className='relative w-20 h-20 end-0 flex justify-center items-center tracking-tighter border-2 border-secondary-action rounded-xl overflow-hidden hover:cursor-pointer'

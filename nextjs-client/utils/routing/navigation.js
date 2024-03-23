@@ -13,7 +13,7 @@ const navRoutes = [
   },
   {
     name: 'Contact Us',
-    path: '',
+    path: '/contact',
   },
   {
     name: 'Appoinments',

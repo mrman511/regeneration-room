@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import MyAppointments from "@/components/appointments/MyAppointments";
 import BookAppointment from "@/components/appointments/BookAppointment";
-import styles from '@/styles/Styles.module.scss'
 
 import useVisualMode from "@/utils/helpers/useVisualMode";
 import apiRequest from "@/utils/api-requests/apiRequests";
@@ -19,18 +18,10 @@ export default function Appointments(){
   const [hours, setHours ] = useState();
 
   const headers = { Authorization: `Bearer ${cookies.user}` }
+  const gridClasses = 'grid grid-cols-1 sm:grid-cols-2 grid-rows-2 sm:grid-rows-1 gap-4 grid-flow-row'
+  const alignmentClasses = 'justify-items-center items-stretch'
 
   useEffect(()=>{
-    if (!appointments && cookies.user){
-      const request = {
-        path: '/appointments/',
-        method: 'get',
-        headers: {
-          Authorization: `Bearer ${cookies.user}`
-        },
-      }
-      apiRequest(request, (res)=>{setAppointments(res.data ? res.data : [])}, console.log);
-    }
     if (!hours){
       const request = {
         path: '/operating_hours/',
@@ -45,11 +36,15 @@ export default function Appointments(){
 
   return (
     <>
-    <Header styles/>
-    <main className="w-full h-auto flex flex-wrap justify-evenly bg-white">
-      { appointments && <MyAppointments appointments={ appointments } setAppointmentData={setAppointmentData}/>}
-      { !appointmentData && <BookAppointment hours={ hours } headers={ headers }/>}
-      { appointmentData && <BookAppointment hours={ hours } headers={ headers } appointmentData={ appointmentData }/>}
+    <Header />
+    <main className="w-full h-auto bg-white" >
+      <div className="w-full h-auto flex justify-center bg-primary-light-1/10">
+        <section className={ [gridClasses, alignmentClasses, "w-full max-w-[950px] h-auto p-2"].join(' ') }>
+          { !appointmentData && <BookAppointment hours={ hours } headers={ headers } setAppointments={ setAppointments } />}
+          { appointmentData && <BookAppointment hours={ hours } headers={ headers } appointmentData={ appointmentData } setAppointments={ setAppointments }/>}
+          <MyAppointments user={ cookies.user } appointments={ appointments } setAppointments={ setAppointments } setAppointmentData={ setAppointmentData }/>
+        </section>
+      </div>
     </main>
     </>
   );

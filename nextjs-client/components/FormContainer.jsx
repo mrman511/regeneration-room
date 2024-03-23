@@ -16,7 +16,7 @@ export default function FormContainer({ styles, FormComponent, title, formData }
   const formRef = useRef();
 
   //pre defined classes
-  const container = 'relative w-auto m-4 p-4';
+  const container = 'relative w-auto h-full m-4 p-4';
   const flex = 'flex flex-col justify-center items-center';
 
   const handleSubmit = (e, path, submissionObj) => {
@@ -59,7 +59,7 @@ export default function FormContainer({ styles, FormComponent, title, formData }
     <>
     {title && <h1 className={"relative text-6xl my-8 text-secondary-action font-cursive"}>{ title }</h1>}
       <article 
-        className={ ['w-full bg-primary-dark text-white text-xl rounded-xl', `${title ? '' : 'top-[20vh]'}`].join(' ') }
+        className={ ['p-2 bg-primary-dark text-white rounded-xl', `${title ? '' : 'top-[20vh]'}`].join(' ') }
         >
         <motion.div className={ [container, flex, 'border-2 border-secondary-action rounded-xl'].join(' ') }
           animate={ getAnimations() }
@@ -74,7 +74,7 @@ export default function FormContainer({ styles, FormComponent, title, formData }
             confirmationObj={ confirmationObj }
             rejectionError={ rejectionError }
             formData={ formData }
-            />}
+            /> }
 
           { mode === 'LOADER' && <HelixLoader /> }
           { mode === 'CONFIRM' && <Confirmation confirmationObj={ confirmationObj.current }/> }

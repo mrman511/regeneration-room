@@ -4,8 +4,6 @@ import { AnimatePresence, useCycle } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
-import logo from '@/public/logo/logo.svg';
-import logoText from '@/public/logo/logo-text.svg'
 import logoFull from '@/public/logo/logo-full.svg'
 
 import McButton from "./McButton";
