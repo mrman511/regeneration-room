@@ -1,5 +1,6 @@
 import './globals.css';
 import localFont from 'next/font/local';
+import "react-datepicker/dist/react-datepicker.css";
 
 import Head from 'next/head';
 

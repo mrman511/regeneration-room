@@ -5,6 +5,9 @@ const opacities = [
   },{
     post: '2/3',
     str: 'a8',
+  },{
+    post: '1/10',
+    str: '25'
   }
 ];
 

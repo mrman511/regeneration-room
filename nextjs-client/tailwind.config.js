@@ -27,7 +27,10 @@ const { fontFamily } = require('tailwindcss/defaultTheme');
         'base': ['adobe-jenson-pro', 'serif'],
         'cursive': ['var(--cursive-font)', ...fontFamily.sans]
       },
-      colors: themeColours
+      colors: themeColours,
+      boxShadow: {
+        'card': `5px 5px 10px -10px #0a0724`
+      }
     },
   };
 
