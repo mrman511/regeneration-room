@@ -22,7 +22,7 @@ const ContactForm = React.forwardRef((props, ref) =>{
     };
     confirmationObj.current = confirmation;
     transition('CONFIRM');
-  }
+  };
 
   function catchFunction(err){
     const message = err.non_field_errors ? err.non_field_errors[0] : 'There has been an error! Please try again soon.'
@@ -40,7 +40,7 @@ const ContactForm = React.forwardRef((props, ref) =>{
     method: 'post',
     responseFunction: responseFunction,
     catchFunction: catchFunction,
-  }
+  };
 
   return (
     <form
@@ -77,4 +77,4 @@ const ContactForm = React.forwardRef((props, ref) =>{
   );
 });
 
-export default ContactForm
+export default ContactForm;
