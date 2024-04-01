@@ -1,22 +1,34 @@
 const navRoutes = [
   {
     name: 'Home',
-    path: '',
+    path: '/',
   },
   {
-    name: 'News',
-    path: '',
-  },
-  {
-    name: 'The EEsystem',
-    path: '',
-  },
-  {
+    name: 'EE System',
+    path: '/ee-system',
+    subRoutes: [
+      {
+        name: 'Pricing',
+        path: '/pricing',
+      },{
+        name: "FAQ's",
+        path: '/frequently-asked-questions',
+      },{
+        name: 'Learn More',
+        path: '/learn-more',
+      },
+    ]
+  },{
+    name: 'Events & Promotions',
+    path: '/events-and-promotions',
+  },{
+    name: 'Services & Products',
+    path: 'services-and-products',
+  },{
     name: 'Contact Us',
     path: '/contact',
-  },
-  {
-    name: 'Appoinments',
+  },{
+    name: 'Book Now',
     path: '/appointments',
   },
 ]

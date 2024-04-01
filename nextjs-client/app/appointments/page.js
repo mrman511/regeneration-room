@@ -37,7 +37,7 @@ export default function Appointments(){
   return (
     <>
     <Header />
-    <main className="w-full h-auto bg-white" >
+    <main className="w-full h-auto bg-white font-base" >
       <div className="w-full h-auto flex justify-center bg-primary-light-1/10">
         <section className={ [gridClasses, alignmentClasses, "w-full max-w-[950px] h-auto p-2"].join(' ') }>
           { !appointmentData && <BookAppointment hours={ hours } headers={ headers } setAppointments={ setAppointments } />}

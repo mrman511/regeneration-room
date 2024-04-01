@@ -1,6 +1,9 @@
 import React from "react";
 
 const ContactForm = React.forwardRef((props, ref) =>{
+  const test_email="bodner80@gmail.com";
+  const test_email_message = "This is just a test email. Please Ignore";
+
   const {
     styles, 
     handleSubmit, 
@@ -55,7 +58,7 @@ const ContactForm = React.forwardRef((props, ref) =>{
       </div>
       <div className="flex flex-col my-2">
         <label className="mb-0.5" htmlFor="email">Email:</label>
-        <input className='w-full p-1 rounded-md text-black' type="email" name='email' required />
+        <input className='w-full p-1 rounded-md text-black' type="email" name='email' required/>
       </div>
       <div className="flex flex-col my-2">
         <label className="mb-0.5" htmlFor="subject">Subject:</label>
