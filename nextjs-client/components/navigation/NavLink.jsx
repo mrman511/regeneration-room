@@ -19,7 +19,7 @@ export default function NavLink({route, classes, linkColourClass, path}){
       onMouseOver={ () => { if (!showSubMenu) toggleShowSubMenu() } }
       onMouseLeave={ () => { if (showSubMenu) toggleShowSubMenu() } }
     >
-      <Link className={ [linkColourClass, 'h-full'].join(' ') } href={ `${path}${route.path}` } className="w-full flex items-center justify-center">
+      <Link className={ [linkColourClass, 'h-full'].join(' ') } href={ `${ path ? path : '' }${route.path}` } className="w-full flex items-center justify-center">
         <p>{ route.name }</p>
         { route.subRoutes && <FontAwesomeIcon className="h-4 w-4 ms-1 lg:ms-2" icon={ faAngleDown } /> }
       </Link>

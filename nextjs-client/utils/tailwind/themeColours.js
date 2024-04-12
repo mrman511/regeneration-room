@@ -20,6 +20,7 @@ const baseThemeColours = {
   'secondary-trim': '#BA7802',
   'success': '#3DE111',
   'error': '#E14D11',
+  'background-light': '#e5f2fa',
 };
 
 const themeColours = {};

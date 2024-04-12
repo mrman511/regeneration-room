@@ -1,9 +1,11 @@
 const navRoutes = [
   {
+    name: 'Book Now',
+    path: '/appointments',
+  },{
     name: 'Home',
     path: '/',
-  },
-  {
+  },{
     name: 'EE System',
     path: '/ee-system',
     subRoutes: [
@@ -27,9 +29,6 @@ const navRoutes = [
   },{
     name: 'Contact Us',
     path: '/contact',
-  },{
-    name: 'Book Now',
-    path: '/appointments',
   },
 ]
 
