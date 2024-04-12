@@ -20,6 +20,7 @@
     "react-cookie": "^6.1.1",
     "react-datepicker": "^6.2.0",
     "react-dom": "^18",
+    "react-youtube": "^10.1.0",
     "rsuite": "^5.55.0",
     "sass": "^1.69.5"
   },

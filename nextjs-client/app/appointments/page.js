@@ -38,7 +38,7 @@ export default function Appointments(){
     <>
     <Header />
     <main className="w-full h-auto bg-white font-base" >
-      <div className="w-full h-auto flex justify-center bg-primary-light-1/10">
+      <div className="w-full h-auto flex justify-center bg-background-light">
         <section className={ [gridClasses, alignmentClasses, "w-full max-w-[950px] h-auto p-2"].join(' ') }>
           { !appointmentData && <BookAppointment hours={ hours } headers={ headers } setAppointments={ setAppointments } />}
           { appointmentData && <BookAppointment hours={ hours } headers={ headers } appointmentData={ appointmentData } setAppointments={ setAppointments }/>}
