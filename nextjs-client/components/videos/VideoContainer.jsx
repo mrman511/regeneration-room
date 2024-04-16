@@ -22,15 +22,23 @@ export default function VideoContainer({  i, path, text}){
   
 
   return (
-    <article className={ [flex, "relative w-full md:w-11/12 my-12"].join(' ') }>
-      <div className={ [ribbonColour, "absolute h-full w-8/12 md:h-[85%] lg:h-[60%] md:w-full"].join(' ') }>
-      </div>
-      <div className="text-center w-7/12 md:w-4/12 md:px-4 my-3 z-10 text-lg" >
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      </div>
-      <div className={ [vidSizeClasses, 'relative h-0 z-20'].join(' ') }>
+    <>
+      {text ? 
+      <article className={ [flex, "relative w-full md:w-11/12 my-12"].join(' ') }>
+        <div className={ [ribbonColour, "absolute h-full w-8/12 md:h-[85%] lg:h-[60%] md:w-full"].join(' ') }>
+        </div>
+        <div className="text-center w-7/12 md:w-4/12 md:px-4 my-3 z-10 text-lg" >
+          <p>{ text }</p>
+        </div>
+        <div className={ [vidSizeClasses, 'relative h-0 z-20'].join(' ') }>
+          <VideoComponent path={ path }/>
+        </div>
+      </article> 
+      :
+      <article className={ [vidSizeClasses, "relative"].join(' ') }>
         <VideoComponent path={ path }/>
-      </div>
-    </article>
+      </article>
+       }
+    </>
   );
 }
