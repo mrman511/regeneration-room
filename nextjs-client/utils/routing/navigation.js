@@ -7,7 +7,7 @@ const navRoutes = [
     path: '/',
   },{
     name: 'EE System',
-    path: '/ee-system',
+    path: '/EESystem',
     subRoutes: [
       {
         name: 'Pricing',
