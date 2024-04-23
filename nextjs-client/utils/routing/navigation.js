@@ -11,7 +11,7 @@ const navRoutes = [
     subRoutes: [
       {
         name: 'Pricing',
-        path: '/pricing',
+        path: '/Pricing',
       },{
         name: "FAQ's",
         path: '/frequently-asked-questions',
