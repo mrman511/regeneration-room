@@ -1,10 +1,15 @@
 import VideoContainer from './VideoContainer';
+import BackgroundImage from '../BackgroundImage';
+
+import floral from '@/public/images/floral-bg.png' 
 
 
 export default function VideoGroup({}){
 
   return (
-    <section className='relative w-full h-auto flex flex-col items-center my-8'>
+    <section className='relative w-full h-auto flex flex-col items-center'>
+      <BackgroundImage src={ floral } alt='Background' gradientClasses="" zIndex='z-0'/>
+      {/* <BackgroundImage gradientClasses='bg-gradient-to-br from-extra-dark via-primary-dark to-extra-dark opacity-80'/> */}
       <VideoContainer 
           i={ 0 }
           path={ "https://www.youtube.com/embed/5r2-4EVdMcI" }
