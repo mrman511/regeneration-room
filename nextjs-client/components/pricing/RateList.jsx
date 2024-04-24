@@ -1,11 +1,12 @@
 import RateContainer from "./RateContainer";
 
-export default function RatesList({ rateGroups }){
+export default function RatesList({ rateGroups, reverseStart }){
   const parsedRateGroups = rateGroups.map((rateGroup, i)=>(
     <RateContainer 
       key={ `rateGroup-${rateGroup.title}` }
       rateGroup={ rateGroup }
       i={ i }
+      reverseStart={ reverseStart }
     />
   ))
 
