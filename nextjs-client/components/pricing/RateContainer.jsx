@@ -1,9 +1,12 @@
 import Image from "next/image";
 
-export default function RateContainer({ i, rateGroup }){
+export default function RateContainer({ i, rateGroup, reverseStart }){
+  const directionVariable = reverseStart ? 1 : 0;
   const { title, sub_title, image_path, rates, note  } = rateGroup;
-  let flex = 'md:flex-row'
-  flex += (i % 2 == 0) ? '' : '-reverse'
+
+  let flex = 'md:flex-row';
+  flex += ((i + directionVariable) % 2 == 0) ? '' : '-reverse';
+  const bannerColour = ((i + directionVariable) % 2 == 0) ? 'bg-secondary-action' : 'bg-secondary-trim';
   const image = require(`../../public/images/rates/${image_path}`);
 
 
@@ -18,8 +21,8 @@ export default function RateContainer({ i, rateGroup }){
   ))
 
   return (
-    <article className={['relative w-full my-10 flex flex-col items-stretch', flex].join(' ')}>
-      <div className="relative w-11/12 h-72 md:h-[22rem]">
+    <article className={['relative w-full my-10 flex flex-col items-center justify-center', flex].join(' ')}>
+      <div className="relative w-full lg:w-[55vw] h-72 md:h-[24rem] z-20">
         <Image 
           src={ image }
           alt={ title }
@@ -31,16 +34,22 @@ export default function RateContainer({ i, rateGroup }){
         />
       </div>
 
-      <div className="relative w-11/12 max-md:py-4 flex flex-col items-center justify-center text-center">
-        <h2 className="font-cursive text-5xl md:text-6xl my-1">{ title }</h2>
-        { sub_title && <p className="text-xl md:text-2xl">{ sub_title }</p>}
-        <table className="my-2 px-4">
-          <tbody>
-            { rateRows }
-          </tbody>
-        </table>
-        {note && <p>*{ note }</p>}
+      <div className={ ['absolute w-11/12 h-full md:h-[20rem] z-0', bannerColour].join(' ') }>
+
+      </div>
+
+      <div className="relative w-11/12 lg:w-[40vw] h-[22rem] z-20">
+        <div className="absolute w-full h-full max-md:py-4 px-4 flex flex-col items-center justify-center text-center">
+          <h2 className="font-cursive text-5xl my-1">{ title }</h2>
+          { sub_title && <p className="text-xl md:text-xl">{ sub_title }</p>}
+          <table className="my-2 px-4">
+            <tbody>
+              { rateRows }
+            </tbody>
+          </table>
+          {note && <p>*{ note }</p>}
+        </div>
       </div>
     </article>
   );
-}
+};

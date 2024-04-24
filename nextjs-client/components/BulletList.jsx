@@ -6,7 +6,7 @@ export default function BulletList({arr, title, backgroundImage}){
   const parsedLines = arr.map((line, i)=>(
     <li
       key={ `${title}-list-${i}`}
-      className="my-3"
+      className="mt-10"
     >
       { line }
     </li>
@@ -20,8 +20,8 @@ export default function BulletList({arr, title, backgroundImage}){
         gradientClasses={ 'bg-gradient-to-br from-extra-dark via-primary-dark to-extra-dark opacity-70' }
         zIndex='z-0'
       />
-      <h2 className="font-cursive text-5xl z-10 mt-8">{ title }</h2>
-      <ul className="relative w-11/12 p-4 mb-4 flex flex-col items-center list-disc text-center text-2xl">
+      <h2 className="font-cursive text-5xl z-10 mt-20">{ title }</h2>
+      <ul className="relative w-11/12 p-4 mb-20 flex flex-col items-center leading-relaxed list-disc text-center text-2xl">
         { parsedLines }
       </ul>
     </section>
