@@ -9,7 +9,7 @@ export default function BackgroundImage({ src, gradientClasses, alt, zIndex }){
       {src && <Image 
         src={ src }
         fill
-        alt={ alt }
+        alt={ alt ? alt : 'Error. Cannot find background image' }
         objectFit='cover'
         // objectPosition='top'
         sizes="100vw"
