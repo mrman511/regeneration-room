@@ -39,10 +39,10 @@ export default function Hero({ styles }){
     <>
     <BackgroundImage />
     <section className="relative w-screen flex flex-col justify-center">
-      <article className="w-full h-96 flex justify-end text-center z-10 w-auto py-16">
-        <div className="lg:w-4/12 lg:me-20 flex flex-col justify-center items-center  text-secondary-action">
-          <h3 className="text-3xl w-4/6 mb-4 text-center flex justify-evenly">
-            <span>Relax,</span>
+      <article className="w-full h-96 flex justify-center sm:justify-end text-center z-10 w-auto py-16">
+        <div className="lg:w-4/12 sm:me-[10%] flex flex-col justify-center items-center  text-secondary-action">
+          <h3 className="text-3xl mb-4 text-center flex justify-evenly">
+            <span className="me-3">Relax,</span>
             <span>Revitalize</span>
           </h3> 
           <h2 className="mt-4">

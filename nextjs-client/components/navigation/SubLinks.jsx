@@ -22,7 +22,7 @@ export default function SubLinks({ routes, path, show }){
       className="absolute top-[75%] w-auto z-20 rounded-md overflow-hidden"
       initial={{ height: 0 }}
       animate={{ 
-        height: show ? 'auto' : 'auto'
+        height: show ? 'auto' : 0,
       }}
     >
       <div className='w-full min-h-max mt-2 py-2 flex flex-wrap bg-almost-black rounded-md'>

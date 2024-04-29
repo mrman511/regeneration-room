@@ -14,7 +14,7 @@ const navRoutes = [
         path: '/Pricing',
       },{
         name: "FAQ's",
-        path: '/frequently-asked-questions',
+        path: '/FAQ',
       },{
         name: 'Learn More',
         path: '/learn-more',
