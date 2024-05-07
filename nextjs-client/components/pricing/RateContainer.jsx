@@ -1,3 +1,6 @@
+'use client'
+import { motion } from "framer-motion";
+
 import Image from "next/image";
 
 export default function RateContainer({ i, rateGroup, reverseStart }){
@@ -22,7 +25,7 @@ export default function RateContainer({ i, rateGroup, reverseStart }){
 
   return (
     <article className={['relative w-full my-10 flex flex-col items-center justify-center', flex].join(' ')}>
-      <div className="relative w-full lg:w-[55vw] h-72 md:h-[24rem] z-20">
+      <div className="relative w-full md:w-[45vw] lg:w-[55vw] h-72 md:h-[24rem] z-20">
         <Image 
           src={ image }
           alt={ title }
@@ -34,11 +37,23 @@ export default function RateContainer({ i, rateGroup, reverseStart }){
         />
       </div>
 
-      <div className={ ['absolute w-11/12 h-full md:h-[20rem] z-0', bannerColour].join(' ') }>
+      <div className={ ['absolute w-11/12 h-full md:h-[20rem] z-0'].join(' ') }>
+        <motion.div className={ [bannerColour, 'absolute h-full'].join(' ') }
+          initial={{ width: 0, left: ((i + directionVariable) % 2 == 0) ? 0 : '100%' }}
+          whileInView={{ width: '100%', left: 0 }}
+          transition={{ delay: .2, duration: .7 }}
+          viewport={{ once: true }}
+        >
 
+        </motion.div>
       </div>
 
-      <div className="relative w-11/12 lg:w-[40vw] h-[22rem] z-20">
+      <motion.div className="relative w-11/12 md:w-[55vw] lg:w-[40vw] h-[22rem] z-20"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ delay: .8, duration: .5 }}
+        viewport={{ once: true }}
+      >
         <div className="absolute w-full h-full max-md:py-4 px-4 flex flex-col items-center justify-center text-center">
           <h2 className="font-cursive text-5xl my-1">{ title }</h2>
           { sub_title && <p className="text-xl md:text-xl">{ sub_title }</p>}
@@ -49,7 +64,7 @@ export default function RateContainer({ i, rateGroup, reverseStart }){
           </table>
           {note && <p>*{ note }</p>}
         </div>
-      </div>
+      </motion.div>
     </article>
   );
 };

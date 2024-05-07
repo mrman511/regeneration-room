@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import ContactInfo from "@/components/contact/ContactInfo";
+import Footer from "@/components/Footer";
 
 import apiRequest from "@/utils/api-requests/apiRequests";
 
@@ -17,6 +18,7 @@ export default function Contact(){
         <ContactInfo />
       </div>
     </main>
+    <Footer />
     </>
   );
 }
