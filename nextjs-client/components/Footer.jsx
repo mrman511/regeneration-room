@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import BackgroundImage from "./BackgroundImage";
 
 import bgImg from '@/public/images/wave-background.jpeg';
@@ -6,6 +7,8 @@ import logo from '@/public/images/logo.png';
 import unifyd from '@/public/images/UNIFYD-Healing.png';
 
 export default function Footer(){
+  const phoneNumber = '(123) 456-7890';
+  const email = 'info@regenerationroom.ca';
 
   return(
     <footer className="w-full h-auto flex flex-col items-center text-white">
@@ -27,14 +30,14 @@ export default function Footer(){
       <section className="w-full flex flex-wrap justify-evenly items-center text-lg">
         <article className="mx-4 my-4">
           <h1 className="text-3xl font-semibold">Regeneration Room</h1>
-          <div>
+          <div className="mb-4">
             <p>1234 Fake St.</p>
             <p>Guelph, Ont L8G-4F4</p>
           </div>
 
           <div>
-            <p>Call: <span>(123) 456-7890</span></p>
-            <p>Email: <span>info@regenerationroom.ca</span></p>
+            <p>Call: <Link href={ `tel:${ phoneNumber }` }><span className="text-secondary-action">{ phoneNumber }</span></Link></p>
+            <p>Email: <Link href={ `malito:${ email }` }><span className="text-secondary-action">{ email }</span></Link></p>
           </div>
         </article>
 

@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import Image from 'next/image';
 
 import styles from '@/styles/Styles.module.scss';
 import Header from '@/components/Header';
-import Hero from '@/components/Hero';
+import Hero from '@/components/index/Hero';
+import AboutUs from '@/components/index/AboutUs';
 import VideoGroup from '@/components/videos/VideoGroup';
 import BulletList from '@/components/BulletList';
 import TestimonialsList from '@/components/TestimonialsList';
@@ -16,9 +16,10 @@ export default function Home() {
 
   return (
     <>
-    <Header />
+    <Header isFixed={ true }/>
     <main className="relative flex flex-col items-center justify-between font-base bg-background-light">
       <Hero styles={ styles }/>
+      <AboutUs />
       <VideoGroup />
       <section className='relative w-full flex flex-col items-center'>
         <article className='relative w-full text-center text-2xl'>
